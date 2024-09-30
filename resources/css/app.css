@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+[x-cloak] {
+    display: none;
+}
+@font-face {
+    font-family: "FCVision"; /* ชื่อฟอนต์ที่คุณต้องการ */
+    src: url("/font/FCVision-Light.otf") format("otf");
+    font-weight: normal; /* หรือ bold */
+    font-style: normal; /* หรือ italic */
+}
+body {
+   /* background-color: aqua; */
+    font-family: "Kanit", Courier, monospace;
+}

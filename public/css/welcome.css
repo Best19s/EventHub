@@ -1,0 +1,142 @@
+
+body {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+   font-family: 'Prompt';
+}
+.container-fluid {
+   padding: 0 3rem;
+}
+
+nav {
+   display: flex;
+   /* background-color: aquamarine; */
+   /* margin-top: 2rem;
+   margin-bottom: 5rem; */
+   margin: 2rem 4rem 5rem 4rem;
+   justify-content: space-between;
+   align-items: center;
+}
+.nav-btn {
+   color: #000;
+   margin-left: 1rem;
+   padding-bottom: 5px;
+}
+.nav-btn:hover {
+   background-color: #B37DEC;
+   border-radius: 12px;
+   color: #fff;
+   text-decoration: none;
+}
+.nav-body {
+   list-style-type: none;
+   padding: 0;
+   margin: 0;
+}
+
+
+.nav-item {
+   display: inline-block;
+}
+.nav-item a {
+   color: #000;
+   margin-left: 2rem;
+   text-decoration: none;
+}
+.logo img{
+   width: 120px;
+}
+
+.head-title {
+   font-size: 2rem;
+   margin-bottom: 2rem;
+}
+
+section {
+   position: relative;
+   /* margin-bottom: 20rem; */
+   height: 500px;
+   display: flex;
+   justify-content: space-between;
+}
+section .text {
+   position: absolute;
+   top: 20%;
+}
+section .text h1 {
+   font-size: 7rem;
+   color: #B37DEC;
+}
+section .text p {
+   font-size: 2rem;
+   /* color: #B37DEC; */
+}
+
+section .img {
+   width: 40%;
+   position: absolute;
+   right: 0;
+   top: 0;
+}
+
+section .img img {
+   width: 100%;
+}
+
+
+
+footer {
+   margin-top: 5rem;
+   padding: 1rem 48px;
+   color: #fff;
+   background: linear-gradient(to bottom, #B37DEC, #B6AEF5);
+   display: flex;
+   /* gap: 4rem; */
+   justify-content: space-between;
+   align-items: center;
+}
+
+footer .icon img {
+   width: 40px;
+}
+.footer-body .logo{
+   margin-top: 1rem;
+   margin-bottom: 1.5rem;
+}
+.footer-contact  {
+   width: 60%;
+}
+.footer-contact input {
+   width: 100%;
+   border: none;
+   padding: .5rem;
+   border-radius: 12px;
+   box-sizing: border-box;
+}
+
+
+.btn-link {
+   margin-top: 1rem;
+   position: relative;
+}
+
+#icon {
+   color: gray;
+   font-size: 25px;
+   position: absolute;
+   right: 10px;
+   top: 7px;
+}
+
+
+.btn {
+   color: #fff;
+   background-color: #B37DEC;
+}
+
+main {
+   padding: 0 4rem !important;
+   /* display: flex;
+   justify-content: space-between; */
+}
