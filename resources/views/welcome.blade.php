@@ -40,7 +40,7 @@
                 <h2 class="head-title">กิจกรรมมาใหม่ล่าสุด</h2>
                 <div class="row">
                     @foreach ($events as $event)
-                        <div class="col-6">
+                        <div class="col-4 mb-5">
                             <div class="card d-flex flex-column rounded" style="height: 100%;">
                                 @if ($event->evt_img)
                                     <div class="rounded-top" style="width: 100%; height: 200px; overflow: hidden;">
@@ -48,7 +48,7 @@
                                             style="width: 100%; height: 100%; object-fit: cover;">
                                     </div>
                                 @endif
-                                <div class="card-body flex-grow-1">
+                                <div class="card-body d-flex flex-column flex-grow-1">
                                     <h5 class="card-title">{{ $event->evt_name }}</h5>
                                     <p class="card-text">
                                         <strong><i class="bi bi-calendar-week-fill"></i></strong>
@@ -65,7 +65,7 @@
                                         @endif
                                     </p>
 
-                                    <a href="/event/{{ $event->id_evt }}" class="btn">ลงทะเบียน</a>
+                                    <a href="/event/{{ $event->id_evt }}" class="btn btn-primary mt-auto" id="btn-reg">ลงทะเบียน</a>
                                 </div>
                             </div>
                         </div>

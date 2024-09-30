@@ -39,7 +39,7 @@
         <div class="evt_info">
             <div class="img-wrapper">
                 <img src="{{ asset('storage/images/events/' . $evt->evt_img) }}" alt="ภาพกิจกรรม" width="100%"
-                    height="auto">
+                    height="500px" style="object-fit: cover" height="auto">
             </div>
             <h1>{{ $evt->evt_name }}</h1>
             <p>{{ $evt->evt_detail }}</p>
@@ -123,51 +123,50 @@
                         </div>
 
                     </div>
-                    @if (isset($user->std_id))
-                        <div class="std_id">
-                            <label for="std_id">รหัสนักศึกษา:</label> <br>
-                            <input type="text" name="std_id" id="std_id" value="{{ $user->std_id }}">
-                        </div>
-                        <select name="faculty" id="">
-                            <option value="{{ $user->idDepartments }}">{{ $user->department->dept_name }}</option>
-                        </select>
-                        <select name="" id="">
-                            <option value="{{ $user->department->faculty->idFaculties }}">
-                                {{ $user->department->faculty->fac_name }}</option>
-                        </select>
-                    @else
-                        
-                        <div class="std_id">
+                    <div class="std_id">
+                        <label for="std_id">รหัสนักศึกษา:</label> <br>
+                        <input type="text" name="std_id" id="std_id" value="{{ $user->std_id ?? '' }}"
+                            {{ !empty($user->std_id) ? 'readonly' : '' }}>
+                    </div>
 
-                            <label for="std_id">รหัสนักศึกษา</label> <br>
-                            <input type="text" name="std_id" id="std_id">
-                        </div>
+                    <div class="fac">
+                        <label for="faculty">เลือกคณะ:</label> <br>
+                        <select id="faculty" name="faculty" {{ !empty($user->std_id) ? 'disabled' : '' }}>
 
-                        <div class="fac">
-                            <label for="faculty">เลือกคณะ:</label> <br>
-                            <select id="faculty" name="faculty">
+                            @if (empty($user->std_id))
                                 <option value="">เลือกคณะ</option>
                                 @foreach ($facs as $fac)
                                     <option value="{{ $fac->idFaculties }}">{{ $fac->fac_name }}</option>
                                 @endforeach
-                            </select>
-                        </div>
+                            @else
+                                <option value="{{ $user->department->faculty->idFaculties ?? '' }}">
+                                    {{ optional($user->department->faculty)->fac_name ?? 'เลือกคณะ' }}
+                                </option>
+                            @endif
+                        </select>
+                    </div>
 
 
-                        <div class="major">
-                            <label for="major">เลือกสาขา:</label> <br>
-                            <select id="major" name="major">
-                                <option value="">เลือกสาขา</option>
-
+                    <div class="major">
+                        <label for="major">เลือกสาขา:</label> <br>
+                        <select id="major" name="major" {{ !empty($user->std_id) ? 'disabled' : '' }}>
+                            @if (empty($user->std_id))
+                                <option value="">เลือกสาขา:</option>
                                 @foreach ($depts as $dept)
                                     <option data-faculty-id="{{ $dept->faculty->idFaculties }}"
                                         value="{{ $dept->idDepartments }}">
                                         {{ $dept->dept_name }}
                                     </option>
                                 @endforeach
-                            </select>
-                        </div>
-                    @endif
+                            @else
+                                <option value="{{ $user->idDepartments ?? '' }}">
+                                    {{ optional($user->department)->dept_name ?? 'เลือกสาขา' }}
+                                </option>
+                            @endif
+                        </select>
+                    </div>
+
+
 
                     <input type="submit" value="ลงทะเบียน">
                 </form>
@@ -200,12 +199,10 @@
                 facultySelect.disabled = true;
                 majorSelect.disabled = true;
                 stdID.disabled = true;
-                // Reset selections when unchecked
-                facultySelect.value = "";
-                majorSelect.value = "";
-                stdID.value = "";
+                // ไม่ทำการรีเซ็ตค่าฟิลด์
             }
         });
+
 
         // Existing functionality to filter majors based on faculty selection
         facultySelect.addEventListener("change", function() {

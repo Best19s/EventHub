@@ -12,7 +12,7 @@ nav {
     display: flex;
     /* background-color: aquamarine; */
     /* margin-top: 2rem;
-   margin-bottom: 5rem; */
+  margin-bottom: 5rem; */
     margin: 2rem 4rem 5rem 4rem;
     justify-content: space-between;
     align-items: center;
@@ -112,12 +112,12 @@ footer .icon img {
 }
 
 #btn-reg {
-   background-color: #b37dec !important;
-   border-color: #000 !important;
+    background-color: #b37dec !important;
+    border-color: #000 !important;
 }
 #btn-reg:hover {
-   background-color: #b6aef5 !important; /* สีเมื่อวางเมาส์เหนือปุ่ม */
-   border-color: #b37dec !important;
+    background-color: #b6aef5 !important; /* สีเมื่อวางเมาส์เหนือปุ่ม */
+    border-color: #b37dec !important;
 }
 
 #icon {
@@ -131,7 +131,7 @@ footer .icon img {
 main {
     padding: 0 4rem !important;
     /* display: flex;
-   justify-content: space-between; */
+  justify-content: space-between; */
 }
 
 #page {
@@ -148,5 +148,68 @@ main {
     color: #fff; /* เปลี่ยนสีตัวอักษร */
 }
 .page-link {
-   color: #000;
+    color: #000;
+}
+
+.form_reg {
+    padding: 0 5rem;
+    /* background-color: #b6aef5; */
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+    display: flex;
+    gap: 5rem;
+}
+
+.form_edit {
+    padding: 0 5rem;
+    /* background-color: #b6aef5; */
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+    display: flex;
+    gap: 5rem;
+}
+.form_edit .form_two {
+   width: 40%;
+}
+.form_edit .form_one {
+   width: 50%;
+}
+
+
+
+.title {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.form_reg input,
+textarea,
+select, .form_edit input, textarea, select {
+    width: 100%;
+    padding: 0.2rem;
+    border-radius: 12px;
+    border: 1px solid #000;
+    margin-bottom: 0.5rem;
+}
+
+.form_reg input[type="checkbox"], .form_edit input[type="checkbox"]  {
+    width: auto;
+}
+.form_reg input[type="file"], .form_edit input[type="file"]  {
+    border: none;
+}
+.form_reg input[type="submit"], .form_edit input[type="submit"] {
+    margin-top: 2rem;
+    background-color: #b37dec !important;
+    border-radius: 20px;
+    padding: 1rem;
+}
+
+.btn {
+   background-color: #b37dec;
+   color: #fff;
 }

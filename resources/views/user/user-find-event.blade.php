@@ -77,7 +77,7 @@
                 @endif
                 <div class="row">
                     @foreach ($evt as $event)
-                        <div class="col-6">
+                        <div class="col-6 mb-5">
                             <div class="card d-flex flex-column rounded" style="height: 100%;">
                                 @if ($event->evt_img)
                                     <div class="rounded-top" style="width: 100%; height: 200px; overflow: hidden;">

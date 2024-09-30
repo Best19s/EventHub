@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'My Application')</title>
-    <link rel="stylesheet" href="{{ asset('css/welcome.css') }}">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="{{ asset('css/admin_report.css') }}">
+    {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"> --}}
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -41,14 +41,6 @@
                             <x-nav-link href="{{ route('profile.show') }}" class="nav-btn">
                                 {{ __(Auth::user()->name) }}
                             </x-nav-link>
-
-                            <form method="POST" action="{{ route('logout') }}" x-data class="inline" style="margin-top: 20px; margin-left:10px;">
-                                @csrf
-                                <button type="submit"
-                                    class="nav-btn" style="color: #000; padding-bottom: 5px; border: none; background: none">
-                                    {{ __('ออกจากระบบ') }}
-                                </button>
-                            </form>
 
                         </div>
                     @else
@@ -102,9 +94,73 @@
         </div>
     </footer>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+   
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const ctx = document.getElementById('myChart').getContext('2d');
+        const myChart = new Chart(ctx, {
+            type: 'bar', // หรือ 'line', 'pie' ตามที่คุณต้องการ
+            data: {
+                labels: ['5', '4', '3', '2', '1'], // เปลี่ยนเป็น label ของคุณ
+                datasets: [{
+                    label: 'คะแนนความพึงพอใจ',
+                    data: [
+                        {{ $ratingCounts[5] }},
+                        {{ $ratingCounts[4] }},
+                        {{ $ratingCounts[3] }},
+                        {{ $ratingCounts[2] }},
+                        {{ $ratingCounts[1] }}
+                    ], // ใช้ค่าจำนวนคะแนนที่ส่งมาจาก Controller
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                aspectRatio: 2, // คุณสามารถปรับได้ตามต้องการ
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            stepSize: 1 // ตั้งค่าขนาดขั้นตอนของแกน Y
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top',
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(tooltipItem) {
+                                return tooltipItem.label + ': ' + tooltipItem.raw +
+                                    ' คน'; // แสดงจำนวนคนที่ให้คะแนนใน tooltip
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+
+    {{-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> --}}
+    {{-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> --}}
 </body>
 
 </html>

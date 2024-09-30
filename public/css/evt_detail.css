@@ -227,3 +227,13 @@ footer {
 .info h4 {
    margin-bottom: 1rem;
 }
+
+#registration-form input[type='submit'] {
+   background-color: #b37dec;
+   padding: .5rem;
+   margin-top: 2rem;
+}
+
+.evt_info {
+   margin-bottom: 4rem;
+}

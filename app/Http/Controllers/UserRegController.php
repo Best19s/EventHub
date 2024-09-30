@@ -65,6 +65,16 @@ class UserRegController extends Controller
       if (!$request->has('dates') || count($request->dates) == 0) {
          return redirect()->back()->with('error', 'กรุณาเลือกวันก่อนที่จะลงทะเบียน');
       }
+
+      $event = Event::find($request->id_evt);
+      if ($event->is_student_only) {
+         $std = User::find($request->id_user);
+         if (empty($request->std_id)) {
+            return redirect()->back()->with('error', 'กิจกรรมนี้สามารถลงทะเบียนได้เฉพาะนักศึกษาเท่านั้น');
+         }
+
+      }
+
       if ($request->has('std')) {
          $std = User::find($request->id_user);
          $std->std_id = $request->std_id;
@@ -149,7 +159,11 @@ class UserRegController extends Controller
 
       $evt_name = Event::find($id_evt);
 
-      return view('user.user-check', compact('event', 'evt_name'));
+      $evt = Event::with(['statusEvent', 'eventDetails'])->withCount('eventDetails as attendant_count')->find($id_evt);
+      $attendantCount = $evt->attendant_count;
+      $maxAttendant = $evt->evt_max_attendant;
+
+      return view('admin.admin-check', compact('event', 'evt_name', 'attendantCount', 'maxAttendant'));
    }
 
    // public function check($id)

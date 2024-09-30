@@ -1,0 +1,209 @@
+body {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+   font-family: "Prompt";
+}
+.container-fluid {
+   padding: 0 3rem;
+}
+
+nav {
+   display: flex;
+   /* background-color: aquamarine; */
+   /* margin-top: 2rem;
+  margin-bottom: 5rem; */
+   margin: 2rem 4rem 5rem 4rem;
+   justify-content: space-between;
+   align-items: center;
+}
+.nav-btn {
+   color: #000;
+   margin-left: 1rem;
+   padding-bottom: 5px;
+}
+.nav-btn:hover {
+   background-color: #b37dec;
+   border-radius: 12px;
+   color: #fff;
+   text-decoration: none;
+}
+.nav-body {
+   list-style-type: none;
+   padding: 0;
+   margin: 0;
+}
+
+.nav-item {
+   display: inline-block;
+}
+.nav-item a {
+   color: #000;
+   margin-left: 2rem;
+   text-decoration: none;
+}
+.logo img {
+   width: 120px;
+}
+
+.head-title {
+   font-size: 2rem;
+   margin-bottom: 2rem;
+}
+
+section {
+   position: relative;
+   /* margin-bottom: 20rem; */
+   height: 500px;
+   display: flex;
+   justify-content: space-between;
+}
+section .text {
+   position: absolute;
+   top: 20%;
+}
+section .text h1 {
+   font-size: 4rem;
+   color: #b37dec;
+}
+section .text p {
+   font-size: 2rem;
+   /* color: #B37DEC; */
+}
+
+section .img {
+   width: 40%;
+   position: absolute;
+   right: 0;
+   top: 0;
+}
+
+section .img img {
+   width: 100%;
+}
+
+footer {
+   margin-top: 5rem;
+   padding: 1rem 48px;
+   color: #fff;
+   background: linear-gradient(to bottom, #b37dec, #b6aef5);
+   display: flex;
+   /* gap: 4rem; */
+   justify-content: space-between;
+   align-items: center;
+}
+
+footer .icon img {
+   width: 40px;
+}
+.footer-body .logo {
+   margin-top: 1rem;
+   margin-bottom: 1.5rem;
+}
+.footer-contact {
+   width: 60%;
+}
+.footer-contact input {
+   width: 100%;
+   border: none;
+   padding: 0.5rem;
+   border-radius: 12px;
+   box-sizing: border-box;
+}
+
+#btn-reg {
+  background-color: #b37dec !important;
+  border-color: #000 !important;
+}
+#btn-reg:hover {
+  background-color: #b6aef5 !important; /* สีเมื่อวางเมาส์เหนือปุ่ม */
+  border-color: #b37dec !important;
+}
+
+#icon {
+   color: gray;
+   font-size: 25px;
+   position: absolute;
+   right: 10px;
+   top: 7px;
+}
+
+main {
+   padding: 0 4rem !important;
+   /* display: flex;
+  justify-content: space-between; */
+}
+
+#page {
+   /* background-color: #B6AEF5; */
+   margin: 0;
+}
+
+#page nav {
+   margin: 0;
+}
+.page-item.active .page-link {
+   background-color: #b6aef5; /* เปลี่ยนสีพื้นหลังของปุ่มที่ใช้งาน */
+   border-color: #b6aef5; /* เปลี่ยนสีเส้นขอบของปุ่มที่ใช้งาน */
+   color: #fff; /* เปลี่ยนสีตัวอักษร */
+}
+.page-link {
+  color: #000;
+}
+
+h1 {
+   font-size: 2rem;
+}
+
+.img-wrapper {
+   width: 100%;
+   margin-bottom: 1rem;
+   /* height: 100%; */
+}
+
+.box_info {
+   float: right;
+}
+
+.form-warpper {
+   display: flex;
+   gap: 5rem;
+}
+
+.box_info {
+   width: 90%;
+}
+
+.form-review {
+   /* background-color: #b6aef5; */
+   width: 60%;
+   padding: 0 2rem;
+}
+
+.form-review textarea {
+   width: 100%;
+   border-radius: 12px;
+}
+
+
+.form-review input[type='submit'] {
+   background-color: #b37dec;
+   width: 100%;
+   border: 1px solid #000;
+   border-radius: 12px;
+   margin-top: 2rem;
+   padding: .5rem;
+}
+
+.rating {
+   margin-top: 2rem;
+}
+
+.btn {
+   background-color: #b37dec;
+   color: #fff;
+}
+
+.box_info {
+   margin-top: 1rem;
+}

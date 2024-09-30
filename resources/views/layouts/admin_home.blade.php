@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="th">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('title', 'My Application')</title>
-    <link rel="stylesheet" href="{{ asset('css/welcome.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/admin_home.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -28,27 +29,30 @@
                 <ul class="nav-body">
                     @auth
                         <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex d-flex align-items-center">
-                            <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')" class="nav-btn">
-                                {{ __('อีเว้นท์ทั้งหมด') }}
-                            </x-nav-link>
-                            <x-nav-link href="/evt/find" :active="request()->routeIs('')" class="nav-btn">
-                                {{ __('ค้นหาอีเว้นท์') }}
-                            </x-nav-link>
-                            <x-nav-link href="/account/{{ auth()->id() }}" :active="request()->routeIs('account')" class="nav-btn">
-                                {{ __('ประวัติอีเว้นท์') }}
-                            </x-nav-link>
+                            @if (auth()->user()->user_type == 'admin')
+                                <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')" class="nav-btn">
+                                    {{ __('หน้าหลัก') }}
+                                </x-nav-link>
+                                <x-nav-link href="/events/create" :active="request()->routeIs('create')" class="nav-btn">
+                                    {{ __('สร้างอีเว้นท์') }}
+                                </x-nav-link>
+                            @else
+                                <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')" class="nav-btn">
+                                    {{ __('อีเว้นท์ทั้งหมด') }}
+                                </x-nav-link>
+                                <x-nav-link href="/evt/find" :active="request()->routeIs('')" class="nav-btn">
+                                    {{ __('ค้นหาอีเว้นท์') }}
+                                </x-nav-link>
+                                <x-nav-link href="/account/{{ auth()->id() }}" :active="request()->routeIs('account')" class="nav-btn">
+                                    {{ __('ประวัติอีเว้นท์') }}
+                                </x-nav-link>
+                            @endif
 
                             <x-nav-link href="{{ route('profile.show') }}" class="nav-btn">
                                 {{ __(Auth::user()->name) }}
                             </x-nav-link>
 
-                            <form method="POST" action="{{ route('logout') }}" x-data class="inline" style="margin-top: 20px; margin-left:10px;">
-                                @csrf
-                                <button type="submit"
-                                    class="nav-btn" style="color: #000; padding-bottom: 5px; border: none; background: none">
-                                    {{ __('ออกจากระบบ') }}
-                                </button>
-                            </form>
+
 
                         </div>
                     @else
@@ -70,10 +74,6 @@
 
         </nav>
     @endif
-
-
-
-
     <main>
         @yield('content') <!-- ส่วนที่จะโหลดเนื้อหาของ view -->
     </main>
@@ -97,14 +97,9 @@
             <h4><i class="bi bi-envelope-plus-fill"></i> Get In Touch</h4>
             <div class="btn-link">
                 <input type="email" name="" id="" placeholder="Email">
-
             </div>
         </div>
     </footer>
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
 </html>

@@ -16,8 +16,10 @@ class FilterUserController extends Controller
          ->get();
 
       $evt_name = Event::find($id_evt);
+      $attendantCount = $event->where('id_evt', $id_evt)->count();
+      $maxAttendant = $evt_name->evt_max_attendant;
 
-      return view('user.user-check', compact('event', 'evt_name'));
+      return view('admin.admin-check', compact('event', 'evt_name', 'attendantCount', 'maxAttendant'));
    }
    public function show_waiting_approval($id_evt)
    {
@@ -28,8 +30,10 @@ class FilterUserController extends Controller
          ->get();
 
       $evt_name = Event::find($id_evt);
+      $attendantCount = $event->where('id_evt', $id_evt)->count();
+      $maxAttendant = $evt_name->evt_max_attendant;
 
-      return view('user.user-check', compact('event', 'evt_name'));
+      return view('admin.admin-check', compact('event', 'evt_name', 'attendantCount', 'maxAttendant'));
    }
 
    public function show_approved($id_evt)
@@ -41,8 +45,10 @@ class FilterUserController extends Controller
          ->get();
 
       $evt_name = Event::find($id_evt);
+      $attendantCount = $event->where('id_evt', $id_evt)->count();
+      $maxAttendant = $evt_name->evt_max_attendant;
 
-      return view('user.user-check', compact('event', 'evt_name'));
+      return view('admin.admin-check', compact('event', 'evt_name', 'attendantCount', 'maxAttendant'));
    }
 
    public function show_not_approved($id_evt)
@@ -54,8 +60,11 @@ class FilterUserController extends Controller
          ->get();
 
       $evt_name = Event::find($id_evt);
+      $attendantCount = $event->where('id_evt', $id_evt)->count();
+      $maxAttendant = $evt_name->evt_max_attendant;
 
-      return view('user.user-check', compact('event', 'evt_name'));
+
+      return view('admin.admin-check', compact('event', 'evt_name', 'attendantCount', 'maxAttendant'));
    }
 
    public function show_evaluated($id_evt)
@@ -67,7 +76,9 @@ class FilterUserController extends Controller
          ->get();
 
       $evt_name = Event::find($id_evt);
+      $attendantCount = $event->where('id_evt', $id_evt)->count();
+      $maxAttendant = $evt_name->evt_max_attendant;
 
-      return view('user.user-check', compact('event', 'evt_name'));
+      return view('admin.admin-check', compact('event', 'evt_name', 'attendantCount', 'maxAttendant'));
    }
 }

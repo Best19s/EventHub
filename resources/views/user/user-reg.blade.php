@@ -33,7 +33,7 @@
 
 
             <div class="img-wrapper">
-                <img src="{{ asset('storage/images/events/' . $evt->evt_img) }}" alt="ภาพกิจกรรม" width="100%"
+                <img src="{{ asset('storage/images/events/' . $evt->evt_img) }}" alt="ภาพกิจกรรม" width="100%" height="500px" style="object-fit: cover"
                     height="auto">
             </div>
 

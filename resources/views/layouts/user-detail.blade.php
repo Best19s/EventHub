@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'My Application')</title>
-    <link rel="stylesheet" href="{{ asset('css/welcome.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/user-detail.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -42,13 +42,6 @@
                                 {{ __(Auth::user()->name) }}
                             </x-nav-link>
 
-                            <form method="POST" action="{{ route('logout') }}" x-data class="inline" style="margin-top: 20px; margin-left:10px;">
-                                @csrf
-                                <button type="submit"
-                                    class="nav-btn" style="color: #000; padding-bottom: 5px; border: none; background: none">
-                                    {{ __('ออกจากระบบ') }}
-                                </button>
-                            </form>
 
                         </div>
                     @else
