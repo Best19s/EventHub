@@ -81,12 +81,26 @@
                             <div class="card d-flex flex-column rounded" style="height: 100%;">
                                 @if ($event->evt_img)
                                     <div class="rounded-top" style="width: 100%; height: 200px; overflow: hidden;">
+                                        @php
+                                            $currentDate = \Carbon\Carbon::now();
+                                            $startRegDate = \Carbon\Carbon::parse($event->evt_reg_start_date);
+                                            $endRegDate = \Carbon\Carbon::parse($event->evt_reg_end_date);
+                                        @endphp
+
+                                        @if ($currentDate->between($startRegDate, $endRegDate))
+                                            <span class="badge bg-success status_evt">อยู่ในช่วงลงทะเบียน</span>
+                                        @elseif ($currentDate->lt($startRegDate))
+                                            <span class="badge bg-warning status_evt">รอลงทะเบียน</span>
+                                        @elseif ($currentDate->gt($endRegDate))
+                                            <span class="badge bg-secondary status_evt">หมดเวลาลงทะเบียน</span>
+                                        @endif
                                         <img src="{{ asset('storage/images/events/' . $event->evt_img) }}" alt="ภาพกิจกรรม"
                                             style="width: 100%; height: 100%; object-fit: cover;">
                                     </div>
                                 @endif
                                 <div class="card-body flex-grow-1">
                                     <h5 class="card-title">{{ $event->evt_name }}</h5>
+                                    <p>ประเภทกิจกรรม: {{ $event->eventType->evt_type_name }}</p>
                                     <p class="card-text">
                                         <strong><i class="bi bi-calendar-week-fill"></i></strong>
                                         {{ \Carbon\Carbon::parse($event->evt_start_date)->format('j') }} -

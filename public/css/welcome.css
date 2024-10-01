@@ -10,9 +10,6 @@ body {
 
 nav {
     display: flex;
-    /* background-color: aquamarine; */
-    /* margin-top: 2rem;
-   margin-bottom: 5rem; */
     margin: 2rem 4rem 5rem 4rem;
     justify-content: space-between;
     align-items: center;
@@ -149,4 +146,13 @@ main {
 }
 .page-link {
    color: #000;
+}
+
+
+.status_evt {
+   font-size: 1rem;
+   color: #fff;
+   position: absolute;
+   right: 0;
+   padding: .5rem;
 }

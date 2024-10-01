@@ -7,6 +7,8 @@ use App\Models\EventType;
 use App\Models\StatusEvent;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
+use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class AdminController extends Controller
@@ -36,7 +38,7 @@ class AdminController extends Controller
    }
    public function create_evt(Request $request)
    {
-
+      
       $new_evt = new Event;
       $new_evt->id_evt_type = $request->evt_type;
       $new_evt->id_status_evt  = $request->evt_status;
@@ -68,7 +70,7 @@ class AdminController extends Controller
 
    public function show_evt()
    {
-      $events = Event::with(['statusEvent', 'eventDetails'])->withCount('eventDetails as attendant_count')->orderBy('id_evt', 'asc')->paginate(6);
+      $events = Event::with(['statusEvent', 'eventDetails'])->withCount('eventDetails as attendant_count')->orderBy('evt_start_date', 'desc')->paginate(6);
 
       // foreach ($events as $event) {
       //    if (\Carbon\Carbon::now()->greaterThan($event->evt_end_date)) {

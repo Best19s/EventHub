@@ -22,6 +22,11 @@ class User extends Authenticatable
    {
       return $this->belongsTo(Department::class, 'idDepartments');
    }
+   public function faculty()
+   {
+      return $this->belongsTo(Faculty::class, 'faculty_id');
+   }
+
 
    public function eventDetails()
    {

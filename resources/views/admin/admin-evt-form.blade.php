@@ -118,54 +118,54 @@
 
                     {{-- <h1>สร้างอีเว้นท์</h1> --}}
                     <label for="name">ใส่ชื่อกิจกรรม: </label>
-                    <input type="text" name="evt_name" id="name">
+                    <input type="text" name="evt_name" id="name" required>
                     <br>
 
                     <label for="location">ใส่สถานที่จัดกิจกรรม: </label>
-                    <input type="text" name="evt_addr" id="location">
+                    <input type="text" name="evt_addr" id="location" required>
                     <br>
 
                     <label for="org">ใส่ชื่อคณะ/ผู้จัดทำ: </label>
-                    <input type="text" name="evt_host" id="org">
+                    <input type="text" name="evt_host" id="org" required>
                     <br>
 
-                    <input type="checkbox" name="for_std" value="1" id="for_std">
+                    <input type="checkbox" name="for_std" value="1" id="for_std" required>
 
                     <label for="for_std">เฉพาะนักศึกษา: </label>
                     <br>
 
                     <label>ใส่รายละเอียดกิจกรรม:</label><br>
-                    <textarea name="evt_detail" cols="30" rows="10">ใส่รายละเอียดตรงนี้.</textarea>
+                    <textarea name="evt_detail" cols="30" rows="10" required>ใส่รายละเอียดตรงนี้.</textarea>
                     <br>
 
                     <label for="max">ใส่จำนวนผู้เข้าร่วมสูงสุด: </label>
-                    <input type="number" name="max_attd" id="max">
+                    <input type="number" name="max_attd" id="max" required>
                     <br>
                 </div>
 
                 <div class="form_two">
 
                     <label>ใส่วันที่เริ่มการลงทะเบียน: </label>
-                    <input type="datetime-local" name="reg_evt_start">
+                    <input type="datetime-local" name="reg_evt_start" required>
                     <br>
 
                     <label>ใส่วันที่สิ้นสุดการลงทะเบียน: </label>
-                    <input type="datetime-local" name="reg_evt_end">
+                    <input type="datetime-local" name="reg_evt_end" required>
                     <br>
                     <label>ใส่วันที่เริ่มกิจกรรม: </label>
-                    <input type="datetime-local" name="evt_start">
+                    <input type="datetime-local" name="evt_start" required>
                     <br>
 
                     <label>ใส่วันที่สิ้นสุดกิจกรรม: </label>
-                    <input type="datetime-local" name="evt_end">
+                    <input type="datetime-local" name="evt_end" required>
                     <br>
 
                     <label for="evt-img">ใส่รูปภาพกิจกรรม:</label>
-                    <input type="file" name="evt_img">
+                    <input type="file" name="evt_img" required>
                     <br>
 
                     <label for="evt_type">ใส่ประเภทกิจกรรม : </label>
-                    <select name="evt_type">
+                    <select name="evt_type" required>
                         <option value="">เลือกประเภทกิจกรรม: </option>
                         @foreach ($evt_type as $type)
                             <option value="{{ $type->id_evt_type }}">{{ $type->evt_type_name }}</option>
@@ -176,7 +176,7 @@
 
 
                     <label for="">ใส่สถานะกิจกรรม:</label>
-                    <select name="evt_status">
+                    <select name="evt_status" required>
                         @foreach ($evt_status as $status)
                             <option value="{{ $status->id_status_evt }}">{{ $status->status_evt_name }}</option>
                         @endforeach

@@ -74,103 +74,101 @@
         <div class="form-reg">
 
 
-            @auth
-                <form action="{{ route('user_reg') }}" method="POST" id="registration-form">
-                    @csrf
-                    @if (session('error_evt'))
-                        <div class="alert alert-danger">
-                            {{ session('error_evt') }}
-                        </div>
-                    @endif
-                    @if (session('error'))
-                        <div class="alert alert-danger">
-                            {{ session('error') }}
-                        </div>
-                    @endif
-                    <h4>เลือกวันเข้าร่วมอีเว้นท์</h4>
-                    @foreach ($dates as $date)
-                        <label>
-                            <input type="checkbox" name="dates[]" value="{{ $date }}"> วันที่
-                            {{ \Carbon\Carbon::parse($date)->format('j') }}
-                        </label><br>
-                    @endforeach
+           <form action="{{ route('user_reg') }}" method="POST" id="registration-form">
+               @csrf
+               @if (session('error_evt'))
+                   <div class="alert alert-danger">
+                       {{ session('error_evt') }}
+                   </div>
+               @endif
+               @if (session('error'))
+                   <div class="alert alert-danger">
+                       {{ session('error') }}
+                   </div>
+               @endif
+               <h4>เลือกวันเข้าร่วมอีเว้นท์</h4>
+               @foreach ($dates as $date)
+                   <label>
+                       <input type="checkbox" name="dates[]" value="{{ $date }}"> วันที่
+                       {{ \Carbon\Carbon::parse($date)->format('j') }}
+                   </label><br>
+               @endforeach
 
-                    <input type="hidden" name="id_evt" value="{{ $evt->id_evt }}">
-                    <input type="hidden" name="id_user" value="{{ $user->id }}">
-                    <input type="hidden" name="password" value="{{ $user->password }}">
-                    <div class="info">
+               <input type="hidden" name="id_evt" value="{{ $evt->id_evt }}">
+               <input type="hidden" name="id_user" value="{{ $user->id }}">
+               <input type="hidden" name="password" value="{{ $user->password }}">
+               <div class="info">
 
-                        <h4>ข้อมูลผู้เข้าร่วม</h4>
-                        <div class="name">
-                            <label for="name">ชื่อผู้เข้าร่วม:</label> <br>
-                            <input type="text" name="name" value="{{ $user->name }}" readonly>
-                        </div>
-                        <div class="email">
-                            <label for="email">อีเมลล์:</label> <br>
-                            <input type="text" name="email" value="{{ $user->email }}" readonly>
-                        </div>
-                        <div class="phone">
-                            <label for="phone">เบอร์โทรศัพท์:</label> <br>
-                            <input type="text" name="phone" value="{{ $user->phone }}" readonly>
-                        </div>
-                    </div>
-
-
-                    <div class="std">
-                        <div class="std">
-                            <h4 for="student-checkbox"> <input type="checkbox" name="std"
-                                    id="student-checkbox">สำหรับนักศึกษา</h4>
-                        </div>
-
-                    </div>
-                    <div class="std_id">
-                        <label for="std_id">รหัสนักศึกษา:</label> <br>
-                        <input type="text" name="std_id" id="std_id" value="{{ $user->std_id ?? '' }}"
-                            {{ !empty($user->std_id) ? 'readonly' : '' }}>
-                    </div>
-
-                    <div class="fac">
-                        <label for="faculty">เลือกคณะ:</label> <br>
-                        <select id="faculty" name="faculty" {{ !empty($user->std_id) ? 'disabled' : '' }}>
-
-                            @if (empty($user->std_id))
-                                <option value="">เลือกคณะ</option>
-                                @foreach ($facs as $fac)
-                                    <option value="{{ $fac->idFaculties }}">{{ $fac->fac_name }}</option>
-                                @endforeach
-                            @else
-                                <option value="{{ $user->department->faculty->idFaculties ?? '' }}">
-                                    {{ optional($user->department->faculty)->fac_name ?? 'เลือกคณะ' }}
-                                </option>
-                            @endif
-                        </select>
-                    </div>
+                   <h4>ข้อมูลผู้เข้าร่วม</h4>
+                   <div class="name">
+                       <label for="name">ชื่อผู้เข้าร่วม:</label> <br>
+                       <input type="text" name="name" value="{{ $user->name }}" readonly>
+                   </div>
+                   <div class="email">
+                       <label for="email">อีเมลล์:</label> <br>
+                       <input type="text" name="email" value="{{ $user->email }}" readonly>
+                   </div>
+                   <div class="phone">
+                       <label for="phone">เบอร์โทรศัพท์:</label> <br>
+                       <input type="text" name="phone" value="{{ $user->phone }}" readonly>
+                   </div>
+               </div>
 
 
-                    <div class="major">
-                        <label for="major">เลือกสาขา:</label> <br>
-                        <select id="major" name="major" {{ !empty($user->std_id) ? 'disabled' : '' }}>
-                            @if (empty($user->std_id))
-                                <option value="">เลือกสาขา:</option>
-                                @foreach ($depts as $dept)
-                                    <option data-faculty-id="{{ $dept->faculty->idFaculties }}"
-                                        value="{{ $dept->idDepartments }}">
-                                        {{ $dept->dept_name }}
-                                    </option>
-                                @endforeach
-                            @else
-                                <option value="{{ $user->idDepartments ?? '' }}">
-                                    {{ optional($user->department)->dept_name ?? 'เลือกสาขา' }}
-                                </option>
-                            @endif
-                        </select>
-                    </div>
+               <div class="std">
+                   <div class="std">
+                       <h4 for="student-checkbox"> <input type="checkbox" name="std"
+                               id="student-checkbox">สำหรับนักศึกษา</h4>
+                   </div>
+
+               </div>
+               <div class="std_id">
+                   <label for="std_id">รหัสนักศึกษา:</label> <br>
+                   <input type="text" name="std_id" id="std_id" value="{{ $user->std_id ?? '' }}"
+                       {{ !empty($user->std_id) ? 'readonly' : '' }}>
+               </div>
+
+               <div class="fac">
+                   <label for="faculty">เลือกคณะ:</label> <br>
+                   <select id="faculty" name="faculty" {{ !empty($user->std_id) ? 'disabled' : '' }}>
+
+                       @if (empty($user->std_id))
+                           <option value="">เลือกคณะ</option>
+                           @foreach ($facs as $fac)
+                               <option value="{{ $fac->idFaculties }}">{{ $fac->fac_name }}</option>
+                           @endforeach
+                       @else
+                           <option value="{{ $user->department->faculty->idFaculties ?? '' }}">
+                               {{ optional($user->department->faculty)->fac_name ?? 'เลือกคณะ' }}
+                           </option>
+                       @endif
+                   </select>
+               </div>
+
+
+               <div class="major">
+                   <label for="major">เลือกสาขา:</label> <br>
+                   <select id="major" name="major" {{ !empty($user->std_id) ? 'disabled' : '' }}>
+                       @if (empty($user->std_id))
+                           <option value="">เลือกสาขา:</option>
+                           @foreach ($depts as $dept)
+                               <option data-faculty-id="{{ $dept->faculty->idFaculties }}"
+                                   value="{{ $dept->idDepartments }}">
+                                   {{ $dept->dept_name }}
+                               </option>
+                           @endforeach
+                       @else
+                           <option value="{{ $user->idDepartments ?? '' }}">
+                               {{ optional($user->department)->dept_name ?? 'เลือกสาขา' }}
+                           </option>
+                       @endif
+                   </select>
+               </div>
 
 
 
-                    <input type="submit" value="ลงทะเบียน">
-                </form>
-            @endauth
+               <input type="submit" value="ลงทะเบียน">
+           </form>
 
         </div>
     @endsection

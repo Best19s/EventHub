@@ -21,6 +21,9 @@ class UserRegController extends Controller
    }
    public function evt_form($id_evt)
    {
+      if (!Auth::check()) {
+         return redirect()->route('login');
+      }
 
       $evt = Event::with(['statusEvent', 'eventDetails'])->withCount('eventDetails as attendant_count')->find($id_evt);
       $facs = Faculty::all();
@@ -55,6 +58,7 @@ class UserRegController extends Controller
 
    public function reg(Request $request)
    {
+
       $existingRegistration = EventDetail::where('id_user', $request->id_user)
          ->where('id_evt', $request->id_evt)
          ->first();
@@ -65,6 +69,12 @@ class UserRegController extends Controller
       if (!$request->has('dates') || count($request->dates) == 0) {
          return redirect()->back()->with('error', 'กรุณาเลือกวันก่อนที่จะลงทะเบียน');
       }
+      if ($request->has('std')) {
+         // ตรวจสอบว่ารหัสนักศึกษาซ้ำหรือไม่
+         if (User::where('std_id', $request->std_id)->exists()) {
+            return redirect()->back()->with('error', 'เกิดข้อผิดพลาดเกี่ยวกับรหัสนักศึกษา ตรวจสอบว่ารหัสนักศึกษาถูกต้องหรือไม่');
+         }
+      }
 
       $event = Event::find($request->id_evt);
       if ($event->is_student_only) {
@@ -72,7 +82,6 @@ class UserRegController extends Controller
          if (empty($request->std_id)) {
             return redirect()->back()->with('error', 'กิจกรรมนี้สามารถลงทะเบียนได้เฉพาะนักศึกษาเท่านั้น');
          }
-
       }
 
       if ($request->has('std')) {
@@ -104,6 +113,7 @@ class UserRegController extends Controller
             $new_reg->join_first_date = $startDate;
             $new_reg->join_last_date = $endDate;
          }
+         $new_reg->created_at = now();
          $new_reg->save();
       } else {
          $new_reg = new EventDetail;
@@ -125,6 +135,7 @@ class UserRegController extends Controller
             $new_reg->join_first_date = $startDate;
             $new_reg->join_last_date = $endDate;
          }
+         $new_reg->created_at = now();
          $new_reg->save();
       }
 
@@ -166,20 +177,6 @@ class UserRegController extends Controller
       return view('admin.admin-check', compact('event', 'evt_name', 'attendantCount', 'maxAttendant'));
    }
 
-   // public function check($id)
-   // {
-   //    $evt_detail = EventDetail::where('id', $id)->first();
-   //    $evt_detail->id_status_user = 2;
-   //    $evt_detail->save();
-   //    return redirect()->back();
-   // }
-   // public function uncheck($id)
-   // {
-   //    $evt_detail = EventDetail::where('id', $id)->first();
-   //    $evt_detail->id_status_user = 3;
-   //    $evt_detail->save();
-   //    return redirect()->back();
-   // }
 
    public function userAction(Request $request)
    {

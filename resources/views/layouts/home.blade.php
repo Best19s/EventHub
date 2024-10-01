@@ -42,13 +42,7 @@
                                 {{ __(Auth::user()->name) }}
                             </x-nav-link>
 
-                            <form method="POST" action="{{ route('logout') }}" x-data class="inline" style="margin-top: 20px; margin-left:10px;">
-                                @csrf
-                                <button type="submit"
-                                    class="nav-btn" style="color: #000; padding-bottom: 5px; border: none; background: none">
-                                    {{ __('ออกจากระบบ') }}
-                                </button>
-                            </form>
+                            
 
                         </div>
                     @else

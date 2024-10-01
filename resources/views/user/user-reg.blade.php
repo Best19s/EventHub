@@ -45,7 +45,7 @@
                 </div>
             </div>
             <div class="evt_reg">
-                <a href="{{ route('home') }}" class="btn">กลับ</a>
+                <a href="/" class="btn">กลับ</a>
                 <div class="tag">
                     <h4>ประเภทกิจกรรม - <span>{{ $evt->eventType->evt_type_name }}</span></h4>
 
@@ -118,13 +118,7 @@
                     <p class="alert alert-warning">กิจกรรมสิ้นสุดแล้ว</p>
                 @endif
 
-                {{-- @guest
 
-                    <div class="alert alert-info" role="alert">
-                        <p>กรุณาล็อกอินก่อนลงทะเบียน</p>
-                    </div>
-                    <a href="{{ route('login') }}" class="btn btn-primary">ล็อกอิน</a>
-                @endguest --}}
                 @if (session('error'))
                     <div class="alert alert-danger">
                         {{ session('error') }}
@@ -133,7 +127,7 @@
                 <div class="btn-reg">
                     <a href="/event-form/{{ $evt->id_evt }}">ลงทะเบียน</a>
                 </div>
-                {{-- <input type="submit" value="ลงทะเบียน"> --}}
+
             </div>
         @endsection
     </div>

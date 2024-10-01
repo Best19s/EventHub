@@ -72,7 +72,7 @@
                     <th><input type="checkbox" id="select-all"></th>
                     <th>รหัสผู้เข้าร่วม</th>
                     <th>ชื่อผู้เข้าร่วม</th>
-                    @if (isset($event) && $event->isNotEmpty() && $event->first()->event->is_student_only == 1)
+                    @if ($event->isNotEmpty() && $event->first()->event->is_student_only == 1)
                         <th>รหัสนักศึกษา</th>
                         <th>สาขา</th>
                         <th>คณะ</th>

@@ -17,6 +17,11 @@ class UserRegDetailController extends Controller
 
       $status_done = EventDetail::where('id_user', $id_user)->where('id_status_user', 5)->get();
 
+
+      if ($evt->isEmpty()) {
+         session()->flash('message', 'ยังไม่มีกิจกรรมที่เข้าร่วม');
+      }
+
       return view('user.user-detail', compact('evt', 'status_done'));
    }
 
