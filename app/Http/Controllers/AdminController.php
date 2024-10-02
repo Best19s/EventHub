@@ -18,7 +18,7 @@ class AdminController extends Controller
       $user_type = Auth::user()->user_type;
 
       if ($user_type == 'user') {
-         // $events = Event::all()->order;
+
          $events = Event::whereIn('id_status_evt', [4, 2])
             ->orderBy('evt_start_date', 'desc')
             ->paginate(3);
@@ -36,14 +36,20 @@ class AdminController extends Controller
       $evt_status = StatusEvent::all();
       return view('admin.admin-evt-form', compact('evt_type', 'evt_status'));
    }
+
    public function create_evt(Request $request)
    {
-      
+
       $new_evt = new Event;
       $new_evt->id_evt_type = $request->evt_type;
       $new_evt->id_status_evt  = $request->evt_status;
       $new_evt->evt_name = $request->evt_name;
-      $new_evt->is_student_only = $request->for_std;
+      if ($request->for_std == '') {
+         $new_evt->is_student_only = 0;
+      } else {
+
+         $new_evt->is_student_only = $request->for_std;
+      }
       $new_evt->evt_host = $request->evt_host;
       $new_evt->evt_addr = $request->evt_addr;
       $new_evt->evt_detail = $request->evt_detail;
@@ -72,19 +78,18 @@ class AdminController extends Controller
    {
       $events = Event::with(['statusEvent', 'eventDetails'])->withCount('eventDetails as attendant_count')->orderBy('evt_start_date', 'desc')->paginate(6);
 
-      // foreach ($events as $event) {
-      //    if (\Carbon\Carbon::now()->greaterThan($event->evt_end_date)) {
-      //       // ถ้าหากกิจกรรมเสร็จสิ้น
-      //       // เปลี่ยนสถานะของ event ก่อน
-      //       $event->id_status_evt = 5; // เปลี่ยนเป็นสถานะเสร็จสิ้น
+      foreach ($events as $event) {
+         if (\Carbon\Carbon::now()->greaterThan($event->evt_end_date)) {
+            // ถ้าหากกิจกรรมเสร็จสิ้น
+            // เปลี่ยนสถานะของ event ก่อน
+            $event->id_status_evt = 5; // เปลี่ยนเป็นสถานะเสร็จสิ้น
 
-      //    } elseif (\Carbon\Carbon::now()->greaterThanOrEqualTo($event->evt_reg_start_date)) {
-      //       // ถ้าหากกำลังดำเนินการ
-      //       $event->id_status_evt = 4; // เปลี่ยนเป็นสถานะกำลังดำเนินการ
-      //    } else
-      //       $event->id_status_evt = 1;
-      // }
-      // $event->save();
+         } elseif (\Carbon\Carbon::now()->greaterThanOrEqualTo($event->evt_reg_start_date)) {
+            // ถ้าหากกำลังดำเนินการ
+            $event->id_status_evt = 4; // เปลี่ยนเป็นสถานะกำลังดำเนินการ
+         }
+      }
+      $event->save();
 
       $title = 'กิจกรรมทั้งหมด';
 
@@ -156,14 +161,13 @@ class AdminController extends Controller
       $event = Event::find($idEvent);
 
       if ($event) {
-         // เปลี่ยนสถานะเป็น 6
-         $event->id_status_evt = 6;
-         $event->save(); // บันทึกการเปลี่ยนแปลง
 
-         // ลบอีเว้นท์
-         $event->delete(); // นี่จะทำให้เกิด soft delete
+         $event->id_status_evt = 6;
+         $event->save();
+
+         $event->delete();
       }
 
-      return redirect()->route('dashboard')->with('status', 'กิจกรรมถูกลบและสถานะเปลี่ยนเป็น 6'); // ส่งข้อความสถานะ
+      return redirect()->route('dashboard');
    }
 }

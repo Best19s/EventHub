@@ -129,7 +129,7 @@
                     <input type="text" name="evt_host" id="org" required>
                     <br>
 
-                    <input type="checkbox" name="for_std" value="1" id="for_std" required>
+                    <input type="checkbox" name="for_std" value="1" id="for_std">
 
                     <label for="for_std">เฉพาะนักศึกษา: </label>
                     <br>

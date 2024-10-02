@@ -12,7 +12,7 @@
 
 <body>
     @section('content')
-        <a href="{{ url()->previous() }}" class="btn-link">กลับ</a>
+        <a href="/dashboard" class="btn-link">กลับ</a>
         @if (session('success'))
             <div class="alert alert-success" style="margin-top: 1rem;">
                 {{ session('success') }}

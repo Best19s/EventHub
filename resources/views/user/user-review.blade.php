@@ -43,12 +43,17 @@
 
                 <div class="rating">
                     <label>คะแนนความพึงพอใจ</label><br>
-                    @for ($i = 5; $i >= 1; $i--)
+                    <input type="radio" name="rating" value=5 id="rt5" required> <label for="rt5">พึงพอใจมาก</label> <br>
+                    <input type="radio" name="rating" value=4 id="rt4" required> <label for="rt4">พึงพอใจ</label> <br>
+                    <input type="radio" name="rating" value=3 id="rt3" required> <label for="rt3">พึงพอใจปานกลาง</label> <br>
+                    <input type="radio" name="rating" value=2 id="rt2" required> <label for="rt2">พึงพอใจน้อย</label> <br>
+                    <input type="radio" name="rating" value=1 id="rt1" required> <label for="rt1">ไม่พึงพอใจ</label> <br>
+                    {{-- @for ($i = 5; $i >= 1; $i--)
                         <input type="radio" name="rating" value="{{ $i }}" id="rt{{ $i }}"
                             required>
                         <label for="rt{{ $i }}">{{ $i }}
                             {{ $i == 5 ? 'พึงพอใจมาก' : ($i == 1 ? 'ไม่พึงพอใจ' : 'พึงพอใจ') }}</label><br>
-                    @endfor
+                    @endfor --}}
                 </div>
 
                 <input type="submit" value="ประเมินผล">
