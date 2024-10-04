@@ -25,7 +25,7 @@ class CheckEventRegistration
 
       // ตรวจสอบว่าผู้ใช้มีสิทธิ์เข้าถึงข้อมูลหรือไม่
       if ($authenticatedUserId != $userId) {
-         return redirect()->route('home')->with('error', 'คุณไม่สามารถเข้าถึงข้อมูลของผู้ใช้อื่นได้');
+         return redirect()->route('home');
       }
 
       return $next($request);

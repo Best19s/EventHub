@@ -69,12 +69,6 @@ class UserRegController extends Controller
       if (!$request->has('dates') || count($request->dates) == 0) {
          return redirect()->back()->with('error', 'กรุณาเลือกวันก่อนที่จะลงทะเบียน');
       }
-      if ($request->has('std')) {
-         // ตรวจสอบว่ารหัสนักศึกษาซ้ำหรือไม่
-         if (User::where('std_id', $request->std_id)->exists()) {
-            return redirect()->back()->with('error', 'เกิดข้อผิดพลาดเกี่ยวกับรหัสนักศึกษา ตรวจสอบว่ารหัสนักศึกษาถูกต้องหรือไม่');
-         }
-      }
 
       $event = Event::find($request->id_evt);
       if ($event->is_student_only) {
@@ -146,13 +140,13 @@ class UserRegController extends Controller
 
    public function unreg($id)
    {
-      // ดึงข้อมูล EventDetail โดยใช้ find หรือ first
+
       $evt = EventDetail::find($id);
 
-      // ตรวจสอบว่าพบข้อมูลหรือไม่
+
       if ($evt) {
-         $evt->id_status_user = 6; // เปลี่ยนสถานะผู้ใช้
-         $evt->save(); // บันทึกการเปลี่ยนแปลง
+         $evt->id_status_user = 6;
+         $evt->save(); 
          $evt->delete();
          return redirect()->back()->with('success', 'ยกเลิกลงทะเบียน');
       } else {
@@ -161,6 +155,8 @@ class UserRegController extends Controller
    }
 
 
+
+   // admin
    public function show_evt($id_evt)
    {
       // $event = EventDetail::with('user','event','statusUser')->where('id_evt',$id_evt)->first();

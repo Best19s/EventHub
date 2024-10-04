@@ -11,7 +11,8 @@ class UserController extends Controller
    {
 
 
-      $events = Event::whereIn('id_status_evt', [4, 2])->orderBy('evt_start_date', 'desc')->paginate(3);
+      $events = Event::whereIn('id_status_evt', [4, 2])->orderBy('evt_start_date', 'desc')
+      ->paginate(3);
 
 
 

@@ -92,7 +92,7 @@
                         <tfoot>
                             <tr>
                                 <td colspan="3" class="text-end"><strong>คะแนนเฉลี่ย:</strong></td>
-                                <td>{{ number_format($averageRating, 2) }}/5</td>
+                                <td>{{ number_format($averageRating, 2) }}/5.00</td>
                             </tr>
                         </tfoot>
                     </table>

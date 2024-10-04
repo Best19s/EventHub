@@ -76,7 +76,7 @@ class AdminController extends Controller
 
    public function show_evt()
    {
-      $events = Event::with(['statusEvent', 'eventDetails'])->withCount('eventDetails as attendant_count')->orderBy('evt_start_date', 'desc')->paginate(6);
+      $events = Event::with(['statusEvent', 'eventDetails'])->withCount('eventDetails as attendant_count')->orderBy('created_at', 'desc')->paginate(6);
 
       foreach ($events as $event) {
          if (\Carbon\Carbon::now()->greaterThan($event->evt_end_date)) {

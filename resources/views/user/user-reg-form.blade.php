@@ -14,10 +14,10 @@
         $eventEnd = \Carbon\Carbon::parse($evt->evt_end_date);
         $dates = [];
         if ($eventStart->eq($eventEnd)) {
-            // ถ้าวันเริ่มและวันสุดท้ายเป็นวันเดียวกัน ให้แสดงวันที่เริ่มกิจกรรมเลย
+            // วันเริ่มและวันสุดท้ายเป็นวันเดียวกัน แสดงวันที่เริ่มกิจกรรม
             $dates[] = $eventStart->format('Y-m-d');
         } else {
-            // ถ้าวันเริ่มและวันสุดท้ายไม่ใช่วันเดียวกัน ให้เก็บข้อมูลตามช่วงวันที่ รวมถึงวันสุดท้ายด้วย
+            // วันเริ่มและวันสุดท้ายไม่ใช่วันเดียวกัน เก็บข้อมูลตามช่วงวันที่ รวมถึงวันสุดท้าย
             for ($date = $eventStart->copy(); $date->lte($eventEnd); $date->addDay()) {
                 $dates[] = $date->format('Y-m-d');
             }
@@ -176,50 +176,50 @@
 
 </html>
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const studentCheckbox = document.getElementById("student-checkbox");
-        const stdID = document.getElementById("std_id");
-        const facultySelect = document.getElementById("faculty");
-        const majorSelect = document.getElementById("major");
+   document.addEventListener("DOMContentLoaded", function() {
+       const studentCheckbox = document.getElementById("student-checkbox");
+       const stdID = document.getElementById("std_id");
+       const facultySelect = document.getElementById("faculty");
+       const majorSelect = document.getElementById("major");
 
-        // Disable dropdowns by default
-        facultySelect.disabled = true;
-        majorSelect.disabled = true;
-        stdID.disabled = true;
+       // ปิดการใช้งาน dropdowns โดยเริ่มต้น
+       facultySelect.disabled = true;
+       majorSelect.disabled = true;
+       stdID.disabled = true;
 
-        // Enable dropdowns when checkbox is checked
-        studentCheckbox.addEventListener("change", function() {
-            if (this.checked) {
-                facultySelect.disabled = false;
-                majorSelect.disabled = false;
-                stdID.disabled = false;
-            } else {
-                facultySelect.disabled = true;
-                majorSelect.disabled = true;
-                stdID.disabled = true;
-                // ไม่ทำการรีเซ็ตค่าฟิลด์
-            }
-        });
+       // เปิดใช้งาน dropdowns เมื่อ checkbox ถูกติ๊ก
+       studentCheckbox.addEventListener("change", function() {
+           if (this.checked) {
+               facultySelect.disabled = false;
+               majorSelect.disabled = false;
+               stdID.disabled = false;
+           } else {
+               facultySelect.disabled = true;
+               majorSelect.disabled = true;
+               stdID.disabled = true;
+               // ไม่ทำการรีเซ็ตค่าฟิลด์
+           }
+       });
 
 
-        // Existing functionality to filter majors based on faculty selection
-        facultySelect.addEventListener("change", function() {
-            const selectedFacultyId = this.value;
+       // ฟังก์ชันที่มีอยู่แล้วสำหรับการกรองสาขาวิชาตามคณะที่เลือก
+       facultySelect.addEventListener("change", function() {
+           const selectedFacultyId = this.value;
 
-            // Hide all options initially
-            for (let option of majorSelect.options) {
-                option.style.display = "none"; // Hide all options
-            }
+           // ซ่อนทุกตัวเลือกในตอนแรก
+           for (let option of majorSelect.options) {
+               option.style.display = "none"; // ซ่อนทุกตัวเลือก
+           }
 
-            // Show only the relevant options
-            for (let option of majorSelect.options) {
-                if (option.value === "" || option.dataset.facultyId === selectedFacultyId) {
-                    option.style.display = "block"; // Show options matching the selected faculty
-                }
-            }
+           // แสดงเฉพาะตัวเลือกที่เกี่ยวข้อง
+           for (let option of majorSelect.options) {
+               if (option.value === "" || option.dataset.facultyId === selectedFacultyId) {
+                   option.style.display = "block"; // แสดงตัวเลือกที่ตรงกับคณะที่เลือก
+               }
+           }
 
-            // Reset the major select to the default value
-            majorSelect.value = ""; // Clear selection
-        });
-    });
+           // รีเซ็ตการเลือกใน major select ให้เป็นค่าดีฟอลต์
+           majorSelect.value = ""; // ล้างการเลือก
+       });
+   });
 </script>

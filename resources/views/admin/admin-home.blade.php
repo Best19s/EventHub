@@ -82,13 +82,13 @@
                             </p>
 
 
-                            <p><strong><i class="bi bi-calendar-fill"></i> วันที่เริ่มลงทะเบียน:</strong> <br>
+                            <p><strong><i class="bi bi-calendar-fill"></i> วันที่ลงทะเบียน:</strong> <br>
                                 {{ \Carbon\Carbon::parse($evt->evt_reg_start_date)->translatedFormat('d') }} -
                                 {{ \Carbon\Carbon::parse($evt->evt_reg_end_date)->translatedFormat('d F Y') }}
                                 {{ \Carbon\Carbon::parse($evt->evt_reg_start_date)->translatedFormat('H:i') }} -
                                 {{ \Carbon\Carbon::parse($evt->evt_reg_end_date)->translatedFormat('H:i') }}
                             </p>
-                            <p><strong><i class="bi bi-calendar-fill"></i> วันที่เริ่มกิจกรรม:</strong> <br>
+                            <p><strong><i class="bi bi-calendar-fill"></i> วันที่จัดกิจกรรม:</strong> <br>
                                 {{ \Carbon\Carbon::parse($evt->evt_start_date)->translatedFormat('d') }} -
                                 {{ \Carbon\Carbon::parse($evt->evt_end_date)->translatedFormat('d F Y') }}
                                 {{ \Carbon\Carbon::parse($evt->evt_start_date)->translatedFormat('H:i') }} -

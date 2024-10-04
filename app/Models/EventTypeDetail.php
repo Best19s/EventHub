@@ -10,9 +10,9 @@ class EventTypeDetail extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    protected $table = 'events_types_detail';
+    protected $table = 'event_type_detail';
 
-    protected $primaryKey = 'id_evt';
+   protected $primaryKey = 'id';
 
     public function event()
     {
